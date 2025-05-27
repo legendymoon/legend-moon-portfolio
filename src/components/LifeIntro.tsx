@@ -71,7 +71,6 @@ const LifeIntro: React.FC = () => {
       const scrollTop = window.scrollY;
       const speedFactor = 1.3;
       const targetDistance = scrollTop * speedFactor;
-      console.log(targetDistance);
       targetDistanceRef.current = targetDistance;
     };
 
