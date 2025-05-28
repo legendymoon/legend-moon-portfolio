@@ -8,7 +8,7 @@ const person = {
   },
   role: "Senior Software Engineer",
   avatar: "/images/avatar.jpg",
-  email: "aurorus999@outlook.com",
+  email: "lapras810@gmail.com",
   location: "Oakland, CA", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
   languages: ["English"], // optional: Leave the array empty if you don't want to display languages
 };
@@ -31,11 +31,6 @@ const social = [
     name: "GitHub",
     icon: "github",
     link: "https://github.com/legendy4141",
-  },
-  {
-    name: "LinkedIn",
-    icon: "linkedin",
-    link: "https://www.linkedin.com/company/once-ui/",
   },
   {
     name: "Email",
