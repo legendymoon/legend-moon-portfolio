@@ -72,7 +72,7 @@ const about = {
   },
   calendar: {
     display: true,
-    link: "https://cal.com/erik-strom-rcsz45",
+    link: "https://cal.com/jjtech",
   },
   intro: {
     display: true,
