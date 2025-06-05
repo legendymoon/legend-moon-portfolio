@@ -2,31 +2,45 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 const workHistoryContent = [
-    {
-      company: 'Aviary AI',
-      duration: '2023 – 2025',
-      role: 'Senior Software Engineer',
-      description: `At Aviary AI, I led the development of outbound conversational agents using GPT-4, LangChain, and Python, tailored for the financial sector. 
-  I architected real-time voice solutions integrating Vapi, Twilio, and ElevenLabs for interactive dialogues with credit union members. 
-  Additionally, I built scalable frontends in React and TypeScript and deployed backend services on AWS with Kubernetes and Terraform to ensure compliance and performance.`,
-    },
-    {
-      company: 'PayPal',
-      duration: '2020 – 2023',
-      role: 'Senior Software Engineer',
-      description: `I drove the redesign of PayPal’s mobile experience using React and React Native, improving user engagement in savings and rewards. 
-  I built microservices in Go and Node.js for Zettle and QR payments on Google Cloud, and engineered secure payment infrastructure with C#, Java, and Kubernetes. 
-  I also led the development of real-time orchestration systems and passkey authentication integrated with Apple Wallet.`,
-    },
-    {
-      company: 'Square Enix',
-      duration: '2018 – 2020',
-      role: 'Software Engineer',
-      description: `As part of the Final Fantasy VII Remake team, I developed high-performance gameplay and UI systems using Unity, C#, and the DOTS framework. 
-  I built internal tools in Go and .NET to streamline asset processing and automate build pipelines, enhancing production efficiency. 
-  I also integrated real-time lighting middleware into Unreal Engine 4, contributing to the game’s immersive cinematic sequences.`,
-    },
-  ];
+  {
+    company: 'Vanta',
+    duration: '2023 – 2025',
+    role: 'Senior Software Engineer',
+    description: `At Vanta, I contributed to the company's growth beyond $100M ARR and a $2.45B valuation by leading development on key features in Vanta AI and the Trust Center. 
+    I drove full-stack initiatives that enhanced security automation and user experience, embedding LLMs to streamline compliance workflows. 
+    My engineering contributions supported enterprise-scale reliability and helped Vanta earn recognition as Fast Company's #1 Most Innovative Security Company of 2024.`
+  },
+  {
+    company: 'Labelbox',
+    duration: '2018 – 2023',
+    role: 'Staff Software Engineer / Software Engineering Lead',
+    description: `At Labelbox, I contributed to the company's growth from early-stage startup to a leader in data-centric AI, supporting its rise to a $1B valuation. 
+    I played a key role in platform engineering during major funding rounds totaling $189M and collaborated on initiatives that enabled over 50% YoY revenue growth. 
+    I also helped scale systems adopted by major enterprise and government clients, including the Department of Defense, while contributing to a culture that earned Labelbox a spot on Forbes' "Next Billion-Dollar Startups" list.`
+  },  
+  {
+    company: 'DroneDeploy',
+    duration: '2017 – 2018',
+    role: 'Frontend Engineer',
+    description: `At DroneDeploy, I built real-time geospatial interfaces using React, Redux, and mapping libraries like Mapbox. 
+    I engineered reusable UI components and optimized frontend performance for drone-mapping applications. 
+    My work on frontend build systems using Webpack streamlined deployment and enhanced developer velocity.`,
+  },
+  {
+    company: 'CircleUp',
+    duration: '2015 – 2017',
+    role: 'Software Engineer',
+    description: `At CircleUp, I developed production-level web apps using React and Redux, and implemented server-side rendering with Node.js to improve SEO and load times. 
+    I focused on enhancing user experience across key product areas through modular frontend architectures and real-time interactions.`,
+  },
+  {
+    company: 'Cisco',
+    duration: '2014 - 2015',
+    role: 'Software Engineer',
+    description: `At Cisco, I contributed to network automation and monitoring tools using Java, JavaScript, and Python. 
+    I collaborated on system integration efforts across large-scale networking infrastructure, ensuring secure and reliable communication between services.`,
+  },
+];
   
 
   const WorkHistory: React.FC = () => {
@@ -36,7 +50,7 @@ const workHistoryContent = [
     
     const topOffset      = 2250;
     const moonSize       = 60;
-    const maxLineHeight  = 750;
+    const maxLineHeight  = 1150;
     
     // Refs for targets & current values
     const targetScaleRef = useRef(1);
@@ -64,10 +78,11 @@ const workHistoryContent = [
      const animate = () => {
        // simple linear interpolation
        const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-    
+       const dynamicSpeed = Math.min(0.35, Math.max(0.05, 450 / maxLineHeight)); // Adjust 300 as a tuning constant
+       
        // ease current → target
-       currentScaleRef.current = lerp(currentScaleRef.current, targetScaleRef.current, 0.1);
-       currentYRef.current     = lerp(currentYRef.current,     targetYRef.current,     0.1);
+       currentScaleRef.current = lerp(currentScaleRef.current, targetScaleRef.current, dynamicSpeed);
+       currentYRef.current     = lerp(currentYRef.current,     targetYRef.current,     dynamicSpeed);
     
        // flush into React
        setFillScale(currentScaleRef.current);
@@ -223,7 +238,7 @@ const workHistoryContent = [
           style={{
             display: 'flex',
             justifyContent: 'space-between',
-            padding: '4rem 0',
+            padding: '3rem 0',
             flexWrap: 'wrap',
             position: 'relative',
           }}
@@ -233,6 +248,7 @@ const workHistoryContent = [
               style={{
                 fontSize: '1.25rem',
                 fontWeight: '600',
+                paddingBottom: '0.2rem',
                 color: 'var(--text-primary)',
               }}
             >
@@ -250,8 +266,9 @@ const workHistoryContent = [
           <div style={{ flex: 2, paddingLeft: '2rem' }}>
             <h4
               style={{
-                fontSize: '1.125rem',
+                fontSize: '1.25rem',
                 fontWeight: '500',
+                paddingBottom: '0.7rem',
                 color: 'var(--text-primary)',
               }}
             >

@@ -126,7 +126,7 @@ export default function About() {
                 )}
               </Column>
               <HoloFx
-                aspectRatio={3 / 4}
+                aspectRatio={4 / 4}
                 radius="l"
                 shine={{
                   opacity: 30,

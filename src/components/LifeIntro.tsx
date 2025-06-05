@@ -3,50 +3,55 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const timelineBlocks = [
   {
-    title: 'From Singapore To Boston',
-    imageSrc: '/jj_boston.jpeg',
+    title: 'From Singapore to Carnegie Mellon',
+    imageSrc: '/carnegie_graudate.jpeg',
     reverse: false,
     description: (
       <>
-        I was born in Singapore, where an early fascination with technology took root.
-        In 2014, at the age of 18, I began my journey at Boston University—marking the start of my academic and professional exploration.
+     I was born in Singapore, always curious about how things worked—taking apart toys, playing with gadgets, and asking “why” more than anyone wanted to hear.
+     In my teens, I stumbled into coding and instantly loved how it let me build things from scratch, just by typing on a screen.
+     That spark took me all the way to Carnegie Mellon in 2010, where I studied Electrical & Computer Engineering and began turning that curiosity into a career.
       </>
     ),
-  },
+  },  
   {
-    title: 'The Lego Spark and Square Enix',
-    imageSrc: '/finalfantasy.jpg',
+    title: 'Finding My Way to Startups',
+    imageSrc: '/startup_building.jpg', // swap in a startup-relevant image
     reverse: true,
     description: (
       <>
-        My passion for building, first sparked by Lego bricks, naturally evolved into creating immersive digital worlds.
-        That passion led me to Square Enix after graduating from Boston University, where I had the incredible opportunity to help develop the <strong>Final Fantasy VII Remake</strong>—a game that brought imagination to life for millions.
+        I started my journey in enterprise at Cisco, but the pace felt too slow for the kind of builder I wanted to become. 
+        I craved fast-moving teams, scrappy problem-solving, and the thrill of launching real products. 
+        CircleUp was my first step into that world, followed by DroneDeploy and Labelbox—each one pushing me deeper into full-stack systems, infrastructure, and leading high-impact projects. 
+        Once I got a taste of startup life, I never looked back.
       </>
     ),
-  },
+  },  
   {
-    title: 'Tackling Real-World Complexity',
-    imageSrc: '/paypal.jpeg',
+    title: 'Life Beyond the Terminal',
+    imageSrc: '/tracy_and_me.jpg',
     reverse: false,
     description: (
       <>
-        The creative world of games eventually led me to crave deeper technical challenges and real-world impact.
-        At PayPal, I transitioned into full-stack engineering—architecting scalable microservices, enhancing mobile financial tools, and delivering secure, high-performance systems used by millions globally.
-        It was a shift from crafting fantasy experiences to solving tangible problems that power everyday life.
+        In the whirlwind of startups and late-night deployments, I wasn't expecting to meet someone who'd shift my entire perspective. 
+        But in 2024, I met Tracy—and everything changed. Our connection was instant, grounded, and real in a way that made the noise fade.
+        <br /><br />
+        She's brought balance to my life, a calm counterpoint to my drive. Whether we're hiking, cooking, or just quietly reading side by side, I've found a new kind of fulfillment—one that no line of code could ever match.
       </>
     ),
-  },
+  },  
   {
-    title: 'Innovating at Aviary AI',
-    imageSrc: '/jj_current.jpeg',
+    title: 'Pushing the Boundaries of AI',
+    imageSrc: '/me_2025.jpeg', // Swap with an image that fits the AI theme if desired
     reverse: true,
     description: (
       <>
-        Now, I’m a Senior Software Engineer at Aviary AI, building innovative tools for the financial sector.
-        I’m deeply involved in exploring the potential of AI and large language models to shape smarter, more adaptive systems.
+        At Vanta, I've been focused on bringing AI into the heart of security and compliance. 
+        I've led initiatives to integrate large language models into our platform—automating complex reviews, surfacing insights faster, and making it easier for companies to stay secure without slowing down. 
+        It's a space that's traditionally manual and opaque, and I'm excited to be building tools that are making it smarter, clearer, and more adaptive.
       </>
     ),
-  },
+  },  
 ];
 
 const LifeIntro: React.FC = () => {
@@ -130,7 +135,7 @@ const LifeIntro: React.FC = () => {
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: '2rem',
-        padding: '6.5rem 0',
+        padding: '6rem 0',
         flexWrap: 'wrap',
       }}
     >
@@ -169,7 +174,7 @@ const LifeIntro: React.FC = () => {
 
       <div style={{ flex: 1 }}>
         <h2 style={{
-          marginBottom: '1.5rem',
+          marginBottom: '1rem',
           fontSize: '1.875rem',
           fontWeight: 500,
           lineHeight: '2.5rem',
