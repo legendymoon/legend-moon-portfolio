@@ -18,20 +18,21 @@ export type StaticSpacingToken =
   | "128"
   | "160";
 
-export type Schemes =
-  | "blue"
-  | "indigo"
-  | "violet"
-  | "magenta"
-  | "pink"
-  | "red"
-  | "orange"
-  | "yellow"
-  | "moss"
-  | "green"
-  | "emerald"
-  | "aqua"
-  | "cyan";
+  export const schemes = [
+    "blue",
+    "aqua",
+    "magenta",
+    "pink",
+    "yellow",
+    "orange",
+    "red",
+    "moss",
+    "green",
+    "emerald",
+    "cyan",
+    "violet",
+    "indigo",
+  ];
 
 export type TShirtSizes = "xs" | "s" | "m" | "l" | "xl";
 

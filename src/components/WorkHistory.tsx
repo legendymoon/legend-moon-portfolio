@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const workHistoryContent = [
   {
@@ -17,7 +17,7 @@ const workHistoryContent = [
     description: `At Labelbox, I contributed to the company's growth from early-stage startup to a leader in data-centric AI, supporting its rise to a $1B valuation. 
     I played a key role in platform engineering during major funding rounds totaling $189M and collaborated on initiatives that enabled over 50% YoY revenue growth. 
     I also helped scale systems adopted by major enterprise and government clients, including the Department of Defense, while contributing to a culture that earned Labelbox a spot on Forbes' "Next Billion-Dollar Startups" list.`
-  },  
+  },
   {
     company: 'DroneDeploy',
     duration: '2017 – 2018',
@@ -41,68 +41,40 @@ const workHistoryContent = [
     I collaborated on system integration efforts across large-scale networking infrastructure, ensuring secure and reliable communication between services.`,
   },
 ];
+
+const WorkHistory: React.FC = () => {
+  const [circleY, setCircleY] = useState(0);
+  const [fillScale, setFillScale] = useState(1);
+
+  const topOffset = 2050;
+  const moonSize = 60;
+  const maxLineHeight = 1150;
+  const speedFactor = 1.6;
   
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
 
-  const WorkHistory: React.FC = () => {
-    const [circleY, setCircleY]     = useState(0);
-    const [fillScale, setFillScale] = useState(1);
-    const animationFrameRef         = useRef<number>();
-    
-    const topOffset      = 2250;
-    const moonSize       = 60;
-    const maxLineHeight  = 1150;
-    
-    // Refs for targets & current values
-    const targetScaleRef = useRef(1);
-    const currentScaleRef= useRef(1);
-    const targetYRef     = useRef(0);
-    const currentYRef    = useRef(0);
-    
-    useEffect(() => {
-     const handleScroll = () => {
-       const scrollTop = window.scrollY;
-       if (scrollTop < topOffset) {
-         targetScaleRef.current = 1;
-         targetYRef.current     = 0;
-         return;
-       }
-       const adjusted = scrollTop - topOffset;
-       const docHeight = document.documentElement.scrollHeight
-                         - topOffset
-                         - window.innerHeight;
-       const pct = docHeight <= 0 ? 0 : Math.min(adjusted / docHeight, 1);
-       targetScaleRef.current = 1 - pct;
-       targetYRef.current     = maxLineHeight * pct;
-     };
-    
-     const animate = () => {
-       // simple linear interpolation
-       const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-       const dynamicSpeed = Math.min(0.35, Math.max(0.05, 450 / maxLineHeight)); // Adjust 300 as a tuning constant
-       
-       // ease current → target
-       currentScaleRef.current = lerp(currentScaleRef.current, targetScaleRef.current, dynamicSpeed);
-       currentYRef.current     = lerp(currentYRef.current,     targetYRef.current,     dynamicSpeed);
-    
-       // flush into React
-       setFillScale(currentScaleRef.current);
-       setCircleY(currentYRef.current);
-    
-       animationFrameRef.current = requestAnimationFrame(animate);
-     };
-    
-     window.addEventListener('scroll', handleScroll);
-     animationFrameRef.current = requestAnimationFrame(animate);
-    
-     return () => {
-       window.removeEventListener('scroll', handleScroll);
-       if (animationFrameRef.current) {
-         cancelAnimationFrame(animationFrameRef.current);
-       }
-     };
-    }, []);
+      if (scrollTop < topOffset) {
+        setFillScale(1);
+        setCircleY(0);
+        return;
+      }
 
-  const shadowOffset = moonSize/2 + moonSize * fillScale;
+      const adjusted = scrollTop - topOffset;
+      const scrollRange =
+        document.documentElement.scrollHeight - window.innerHeight - topOffset;
+
+      const pct = Math.min(Math.max((adjusted * speedFactor) / scrollRange, 0), 1);
+      setFillScale(1 - pct);
+      setCircleY(maxLineHeight * pct);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const shadowOffset = moonSize / 2 + moonSize * fillScale;
   const visualScale = Math.max(0, fillScale - (moonSize - 5) / maxLineHeight);
 
   return (
@@ -123,18 +95,17 @@ const workHistoryContent = [
             transformOrigin: 'bottom',
             transform: `scaleY(${visualScale})`,
             borderRadius: '9999px',
-            backgroundImage:
-              'linear-gradient(to bottom, #60E4FC, transparent)',
+            backgroundImage: 'linear-gradient(to bottom, #60E4FC, transparent)',
           }}
         />
         <svg
-            width="8"
-            height={maxLineHeight}
-            viewBox={`0 0 8 ${maxLineHeight}`}
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+          width="8"
+          height={maxLineHeight}
+          viewBox={`0 0 8 ${maxLineHeight}`}
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
         >
-        <line
+          <line
             x1="4"
             y1="0"
             x2="4"
@@ -143,25 +114,24 @@ const workHistoryContent = [
             strokeOpacity="0.24"
             strokeWidth="4"
             strokeLinejoin="round"
-        />
+          />
         </svg>
       </div>
 
-      {/* Moon with realistic eclipse mask + glow */}
+      {/* Moon with mask & glow */}
       <svg
         width={moonSize}
         height={moonSize}
         style={{
           position: 'absolute',
           top: `${circleY}px`,
-          left: `calc(25% - ${moonSize/2}px)`,
+          left: `calc(25% - ${moonSize / 2}px)`,
           zIndex: 10,
           overflow: 'visible',
         }}
         aria-hidden="true"
       >
         <defs>
-          {/* 1) your eclipse mask */}
           <mask
             id="moon-mask"
             maskUnits="userSpaceOnUse"
@@ -179,7 +149,6 @@ const workHistoryContent = [
             />
           </mask>
 
-          {/* 2) glow filter */}
           <filter
             id="moon-glow"
             x="-50%"
@@ -187,9 +156,7 @@ const workHistoryContent = [
             width="200%"
             height="200%"
           >
-            {/* blur the graphic that comes through the mask */}
             <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blurred" />
-            {/* stack the blur behind the original so it looks like a halo */}
             <feMerge>
               <feMergeNode in="blurred" />
               <feMergeNode in="SourceGraphic" />
@@ -197,7 +164,6 @@ const workHistoryContent = [
           </filter>
         </defs>
 
-        {/* 3) wrap the masked image in a group that gets the glow */}
         <g filter="url(#moon-glow)" className="moon-glow">
           <image
             href="/images/illustrator/moon.png"
@@ -211,21 +177,15 @@ const workHistoryContent = [
         </g>
       </svg>
 
-      {/* … your work history entries … */}
-
-      {/* 4) add this style tag somewhere in your component (or put it in your global CSS) */}
       <style jsx>{`
         .moon-glow {
-          /* pulse the strength of the glow by animating the blur radius */
           animation: glow-pulse 3s ease-in-out infinite;
         }
         @keyframes glow-pulse {
           0%, 100% {
-            /* small, tight glow */
             filter: drop-shadow(0 0 4px rgba(96, 228, 252, 0.6));
           }
           50% {
-            /* soft, more spread-out glow */
             filter: drop-shadow(0 0 12px rgba(96, 228, 252, 0.8));
           }
         }

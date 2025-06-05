@@ -1,9 +1,10 @@
+// src/app/blog/page.tsx
 import { Column, Heading } from "@/once-ui/components";
-import { Mailchimp } from "@/components";
-import { Posts } from "@/components/blog/Posts";
 import { baseURL } from "@/app/resources";
-import { blog, person, newsletter } from "@/app/resources/content";
+import { blog, person } from "@/app/resources/content";
 import { Meta, Schema } from "@/once-ui/modules";
+import BlogClient from "@/components/blog/BlogClient";
+import { getPosts } from "@/app/utils/utils"; // fs OK here
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -15,7 +16,9 @@ export async function generateMetadata() {
   });
 }
 
-export default function Blog() {
+export default async function Blog() {
+  const allPosts = getPosts(['src', 'app', 'blog', 'posts']);
+
   return (
     <Column maxWidth="s">
       <Schema
@@ -34,11 +37,8 @@ export default function Blog() {
       <Heading marginBottom="l" variant="display-strong-s">
         {blog.title}
       </Heading>
-      <Column
-				fillWidth flex={1}>
-				<Posts range={[1,2]} thumbnail direction="column"/>
-				<Posts range={[3]} thumbnail columns="1" direction="row"/>
-			</Column>
+
+      <BlogClient allPosts={allPosts} />
     </Column>
   );
 }

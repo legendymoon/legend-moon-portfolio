@@ -22,7 +22,8 @@ import WorkHistory from "@/components/WorkHistory";
 import styles from "@/components/about/about.module.scss";
 import { person, about, social } from "@/app/resources/content";
 import React from "react";
-import { Meta, Schema } from "@/once-ui/modules";
+import { Meta, Schema} from "@/once-ui/modules";
+import ChartWrapper from "../about/components/ChartWrapper"
 
 export async function generateMetadata() {
   return Meta.generate({
@@ -146,157 +147,223 @@ export default function About() {
               </HoloFx>
             </Flex>
           </Column>
-
-          {about.intro.display && (
-            <Column
-              fillWidth
-              gap="m"
-              marginBottom="xl"
-              className="space-y-4"
-              align="center"
+          
+          {/* My Life Journey */}
+          <Column
+            fillWidth
+            gap="m"
+            marginBottom="xl"
+            className="space-y-4"
+            align="center"
+          >
+            <div
+              className="relative w-full
+                        before:absolute before:top-0 before:h-px before:bg-border-primary/50
+                        before:-left-4 before:right-[-1rem]
+                        md:before:-left-8 md:before:right-[-2rem]
+                        lg:before:inset-x-0
+                        after:absolute after:bottom-0 after:h-px after:bg-border-primary/50
+                        after:-left-4 after:right-[-1rem]
+                        md:after:-left-8 md:after:right-[-2rem]
+                        lg:after:inset-x-0" 
             >
-              <div
-                className="relative w-full
-                          before:absolute before:top-0 before:h-px before:bg-border-primary/50
-                          before:-left-4 before:right-[-1rem]
-                          md:before:-left-8 md:before:right-[-2rem]
-                          lg:before:inset-x-0
-                          after:absolute after:bottom-0 after:h-px after:bg-border-primary/50
-                          after:-left-4 after:right-[-1rem]
-                          md:after:-left-8 md:after:right-[-2rem]
-                          lg:after:inset-x-0" 
-              >
-                <Text className="text-center text-[color:#82F1FC] w-full" style={{ color: '#10e9ff'}}>
-                    Behind the Code
-                </Text>
-              </div>
+              <Text className="text-center text-[color:#82F1FC] w-full" style={{ color: '#10e9ff'}}>
+                  Behind the Code
+              </Text>
+            </div>
 
-              <div
-                className="relative w-full
-                          before:absolute before:top-0 before:h-px before:bg-border-primary/50
-                          before:-left-4 before:right-[-1rem]
-                          md:before:-left-8 md:before:right-[-2rem]
-                          lg:before:inset-x-0
-                          after:absolute after:bottom-0 after:h-px after:bg-border-primary/50
-                          after:-left-4 after:right-[-1rem]
-                          md:after:-left-8 md:after:right-[-2rem]
-                          lg:after:inset-x-0"
+            <div
+              className="relative w-full
+                        before:absolute before:top-0 before:h-px before:bg-border-primary/50
+                        before:-left-4 before:right-[-1rem]
+                        md:before:-left-8 md:before:right-[-2rem]
+                        lg:before:inset-x-0
+                        after:absolute after:bottom-0 after:h-px after:bg-border-primary/50
+                        after:-left-4 after:right-[-1rem]
+                        md:after:-left-8 md:after:right-[-2rem]
+                        lg:after:inset-x-0"
+            >
+              <Heading
+                variant="display-strong-m"
+                className="mx-auto max-w-lg text-balance text-3xl font-medium
+                          leading-[40px] tracking-tighter text-text-primary"
               >
-                <Heading
-                  variant="display-strong-m"
-                  className="mx-auto max-w-lg text-balance text-3xl font-medium
-                            leading-[40px] tracking-tighter text-text-primary"
-                >
-                  The story behind my code and career.
-                </Heading>
-              </div>
-            </Column>
-          )}
+                The story behind my code and career.
+              </Heading>
+            </div>
+          </Column>
           <Flex fillWidth horizontal="center">
             <LifeIntro/>
           </Flex>
           
-          {about.intro.display && (
-            <Column
-              fillWidth
-              gap="m"
-              marginBottom="xl"
-              className="space-y-4"
+          {/* My Work History */}     
+          <Column
+            fillWidth
+            gap="m"
+            marginBottom="xl"
+            className="space-y-4"
+          >
+            <div
+              className="relative w-full
+                        before:absolute before:top-0 before:h-px before:bg-border-primary/50
+                        before:-left-4 before:right-[-1rem]
+                        md:before:-left-8 md:before:right-[-2rem]
+                        lg:before:inset-x-0
+                        after:absolute after:bottom-0 after:h-px after:bg-border-primary/50
+                        after:-left-4 after:right-[-1rem]
+                        md:after:-left-8 md:after:right-[-2rem]
+                        lg:after:inset-x-0" 
             >
-              <div
-                className="relative w-full
-                          before:absolute before:top-0 before:h-px before:bg-border-primary/50
-                          before:-left-4 before:right-[-1rem]
-                          md:before:-left-8 md:before:right-[-2rem]
-                          lg:before:inset-x-0
-                          after:absolute after:bottom-0 after:h-px after:bg-border-primary/50
-                          after:-left-4 after:right-[-1rem]
-                          md:after:-left-8 md:after:right-[-2rem]
-                          lg:after:inset-x-0" 
-              >
-                <Text className="text-center text-[color:#82F1FC] w-full" style={{ color: '#10e9ff'}}>
-                  Professional Chapters
-                </Text>
-              </div>
+              <Text className="text-center text-[color:#82F1FC] w-full" style={{ color: '#10e9ff'}}>
+                Professional Chapters
+              </Text>
+            </div>
 
-              <div
-                className="relative w-full
-                          before:absolute before:top-0 before:h-px before:bg-border-primary/50
-                          before:-left-4 before:right-[-1rem]
-                          md:before:-left-8 md:before:right-[-2rem]
-                          lg:before:inset-x-0
-                          after:absolute after:bottom-0 after:h-px after:bg-border-primary/50
-                          after:-left-4 after:right-[-1rem]
-                          md:after:-left-8 md:after:right-[-2rem]
-                          lg:after:inset-x-0"
+            <div
+              className="relative w-full
+                        before:absolute before:top-0 before:h-px before:bg-border-primary/50
+                        before:-left-4 before:right-[-1rem]
+                        md:before:-left-8 md:before:right-[-2rem]
+                        lg:before:inset-x-0
+                        after:absolute after:bottom-0 after:h-px after:bg-border-primary/50
+                        after:-left-4 after:right-[-1rem]
+                        md:after:-left-8 md:after:right-[-2rem]
+                        lg:after:inset-x-0"
+            >
+              <Heading
+                variant="display-strong-m"
+                className="mx-auto max-w-lg text-balance text-3xl font-medium
+                          leading-[40px] tracking-tighter text-text-primary"
               >
-                <Heading
-                  variant="display-strong-m"
-                  className="mx-auto max-w-lg text-balance text-3xl font-medium
-                            leading-[40px] tracking-tighter text-text-primary"
-                >
-                  My journey through roles and impact.
-                </Heading>
-              </div>
-            </Column>
-          )}
-          <Flex fillWidth horizontal="center">
+                My journey through roles and impact.
+              </Heading>
+            </div>
+          </Column>
+          <Flex fillWidth horizontal="center" marginBottom="l">
             <WorkHistory/>
           </Flex>
-
-          {about.intro.display && (
-            <Column
-              fillWidth
-              gap="m"
-              marginBottom="xl"
-              className="space-y-4"
-              align="center"
+          
+          {/* My Skills Distribution */}
+          <Column
+            fillWidth
+            gap="m"
+            marginBottom="xl"
+            className="space-y-4"
+            align="center"
+          >
+            <div
+              className="relative w-full
+                        before:absolute before:top-0 before:h-px before:bg-border-primary/50
+                        before:-left-4 before:right-[-1rem]
+                        md:before:-left-8 md:before:right-[-2rem]
+                        lg:before:inset-x-0
+                        after:absolute after:bottom-0 after:h-px after:bg-border-primary/50
+                        after:-left-4 after:right-[-1rem]
+                        md:after:-left-8 md:after:right-[-2rem]
+                        lg:after:inset-x-0" 
             >
-              <div
-                className="relative w-full
-                          before:absolute before:top-0 before:h-px before:bg-border-primary/50
-                          before:-left-4 before:right-[-1rem]
-                          md:before:-left-8 md:before:right-[-2rem]
-                          lg:before:inset-x-0
-                          after:absolute after:bottom-0 after:h-px after:bg-border-primary/50
-                          after:-left-4 after:right-[-1rem]
-                          md:after:-left-8 md:after:right-[-2rem]
-                          lg:after:inset-x-0" 
+              <Text
+                className="text-center text-[color:#82F1FC] w-full"
+                style={{ color: '#10e9ff' }}
               >
-                <Text className="text-center text-[color:#82F1FC] w-full" style={{ color: '#10e9ff'}}>
-                    Beyond the Code
-                </Text>
-              </div>
+                My Skillset, Visualized
+              </Text>
+            </div>
 
-              <div
-                className="relative w-full
-                          before:absolute before:top-0 before:h-px before:bg-border-primary/50
-                          before:-left-4 before:right-[-1rem]
-                          md:before:-left-8 md:before:right-[-2rem]
-                          lg:before:inset-x-0
-                          after:absolute after:bottom-0 after:h-px after:bg-border-primary/50
-                          after:-left-4 after:right-[-1rem]
-                          md:after:-left-8 md:after:right-[-2rem]
-                          lg:after:inset-x-0"
+            <div
+              className="relative w-full
+                        before:absolute before:top-0 before:h-px before:bg-border-primary/50
+                        before:-left-4 before:right-[-1rem]
+                        md:before:-left-8 md:before:right-[-2rem]
+                        lg:before:inset-x-0
+                        after:absolute after:bottom-0 after:h-px after:bg-border-primary/50
+                        after:-left-4 after:right-[-1rem]
+                        md:after:-left-8 md:after:right-[-2rem]
+                        lg:after:inset-x-0"
+            >
+              <Heading
+                variant="display-strong-m"
+                className="mx-auto max-w-xl text-balance text-3xl font-medium
+                          leading-[40px] tracking-tighter text-text-primary"
               >
-                <Heading
-                  variant="display-strong-m"
-                  className="mx-auto max-w-lg text-balance text-3xl font-medium
-                            leading-[40px] tracking-tighter text-text-primary"
-                >
-                  Exploring the things that fuel my curiosity outside the IDE.
-                </Heading>
-              </div>
-            </Column>
-          )}
+                A breakdown of my engineering focus and tools over the years.
+              </Heading>
+            </div>
 
-          {about.intro.display && (
-            <Flex fillWidth horizontal="center" gap="20" wrap>
-              <Row fillWidth gap="16" mobileDirection="column">
-                <Column fillWidth center>
-                  {/* Hiking & Environment Lover */}
+            <Text className="max-w-2xl text-center text-md text-text-secondary">
+              These charts highlight the balance of my technical strengths — from years of hands-on experience with core technologies
+              to how I contribute across product strategy, systems architecture, developer enablement, and AI innovation.
+            </Text>
+          </Column>
+          <ChartWrapper />
+
+          {/* My Interest Outside of Coding */}
+          <Column
+            fillWidth
+            gap="m"
+            marginBottom="xl"
+            className="space-y-4"
+            align="center"
+          >
+            <div
+              className="relative w-full
+                        before:absolute before:top-0 before:h-px before:bg-border-primary/50
+                        before:-left-4 before:right-[-1rem]
+                        md:before:-left-8 md:before:right-[-2rem]
+                        lg:before:inset-x-0
+                        after:absolute after:bottom-0 after:h-px after:bg-border-primary/50
+                        after:-left-4 after:right-[-1rem]
+                        md:after:-left-8 md:after:right-[-2rem]
+                        lg:after:inset-x-0" 
+            >
+              <Text className="text-center text-[color:#82F1FC] w-full" style={{ color: '#10e9ff'}}>
+                  Beyond the Code
+              </Text>
+            </div>
+
+            <div
+              className="relative w-full
+                        before:absolute before:top-0 before:h-px before:bg-border-primary/50
+                        before:-left-4 before:right-[-1rem]
+                        md:before:-left-8 md:before:right-[-2rem]
+                        lg:before:inset-x-0
+                        after:absolute after:bottom-0 after:h-px after:bg-border-primary/50
+                        after:-left-4 after:right-[-1rem]
+                        md:after:-left-8 md:after:right-[-2rem]
+                        lg:after:inset-x-0"
+            >
+              <Heading
+                variant="display-strong-m"
+                className="mx-auto max-w-lg text-balance text-3xl font-medium
+                          leading-[40px] tracking-tighter text-text-primary"
+              >
+                Exploring the things that fuel my curiosity outside the IDE.
+              </Heading>
+            </div>
+          </Column>
+          <Flex fillWidth horizontal="center" gap="20" wrap marginBottom="xl">
+            <Row fillWidth gap="16" mobileDirection="column">
+              <Column fillWidth center>
+                {/* Hiking & Environment Lover */}
+                <TiltFx aspectRatio={3 / 4} radius="l" direction="column">
+                  <SmartImage src="/images/selfie/hiking.jpg" alt="Hiking Enthusiast" />
+                  <Column
+                    align="center"
+                    padding="m"
+                    background="brand-alpha-weak"
+                    radius="l"
+                    style={{ marginTop: -4 }}
+                  >
+                    <Heading variant="display-strong-s">Hiking Enthusiast</Heading>
+                    <Tag>Nature Explorer</Tag>
+                  </Column>
+                </TiltFx>
+              </Column>
+              <Column fill gap="16">
+                <Row fill center>
+                  {/* Pet Lover */}
                   <TiltFx aspectRatio={3 / 4} radius="l" direction="column">
-                    <SmartImage src="/images/selfie/hiking.jpg" alt="Hiking Enthusiast" />
+                    <SmartImage src="/images/selfie/pet.jpeg" alt="Pet Lover" />
                     <Column
                       align="center"
                       padding="m"
@@ -304,48 +371,31 @@ export default function About() {
                       radius="l"
                       style={{ marginTop: -4 }}
                     >
-                      <Heading variant="display-strong-s">Hiking Enthusiast</Heading>
-                      <Tag>Nature Explorer</Tag>
+                      <Heading variant="display-strong-s">Pet Lover</Heading>
+                      <Tag>Dog Parent</Tag>
                     </Column>
                   </TiltFx>
-                </Column>
-                <Column fill gap="16">
-                  <Row fill center>
-                    {/* Pet Lover */}
-                    <TiltFx aspectRatio={3 / 4} radius="l" direction="column">
-                      <SmartImage src="/images/selfie/pet.jpeg" alt="Pet Lover" />
-                      <Column
-                        align="center"
-                        padding="m"
-                        background="brand-alpha-weak"
-                        radius="l"
-                        style={{ marginTop: -4 }}
-                      >
-                        <Heading variant="display-strong-s">Pet Lover</Heading>
-                        <Tag>Dog Parent</Tag>
-                      </Column>
-                    </TiltFx>
-                  </Row>
-                  <Row fill center>
-                    {/* Avid Reader */}
-                    <TiltFx aspectRatio={3 / 4} radius="l" direction="column">
-                      <SmartImage src="/images/illustrator/atomic_habits.jpg" alt="Avid Reader" />
-                      <Column
-                        align="center"
-                        padding="m"
-                        background="brand-alpha-weak"
-                        radius="l"
-                        style={{ marginTop: -4 }}
-                      >
-                        <Heading variant="display-strong-s">Avid Reader</Heading>
-                        <Tag>Bookworm</Tag>
-                      </Column>
-                    </TiltFx>
-                  </Row>
-                </Column>
-              </Row>
-            </Flex>
-          )}
+                </Row>
+                <Row fill center>
+                  {/* Avid Reader */}
+                  <TiltFx aspectRatio={3 / 4} radius="l" direction="column">
+                    <SmartImage src="/images/illustrator/atomic_habits.jpg" alt="Avid Reader" />
+                    <Column
+                      align="center"
+                      padding="m"
+                      background="brand-alpha-weak"
+                      radius="l"
+                      style={{ marginTop: -4 }}
+                    >
+                      <Heading variant="display-strong-s">Avid Reader</Heading>
+                      <Tag>Bookworm</Tag>
+                    </Column>
+                  </TiltFx>
+                </Row>
+              </Column>
+            </Row>
+          </Flex>
+
         </Column>
       </Flex>
     </Column>
