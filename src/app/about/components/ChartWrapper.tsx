@@ -20,8 +20,8 @@ const ChartWrapper = () => {
       },
       {
         root: null,
-        rootMargin: "0px 0px 20px 0px",
-        threshold: 0.4,
+        rootMargin: "0px 0px 40px 0px",
+        threshold: 0.2,
       }
     );
 
@@ -30,7 +30,7 @@ const ChartWrapper = () => {
   }, []);
 
   return (
-    <div ref={chartRef} style={{ minHeight: "880px", position: "relative" }}>
+    <div ref={chartRef} style={{ minHeight: "580px", position: "relative" }}>
       <div
         style={{
           opacity: visible ? 1 : 0,
@@ -76,8 +76,10 @@ const ChartWrapper = () => {
                 { label: "Node.js", Years: 7 },
                 { label: "Python", Years: 6 },
                 { label: "Go", Years: 4 },
-                { label: "GraphQL", Years: 5 },
-                { label: "GCP/AWS", Years: 6 },
+                { label: "GraphQL", Years: 6 },
+                { label: "AWS", Years: 8 },
+                { label: "PostgreSQL", Years: 7 },
+                { label: "MySQL", Years: 8 },
               ]}
             />
           </Row>

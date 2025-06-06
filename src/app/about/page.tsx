@@ -239,7 +239,7 @@ export default function About() {
               </Heading>
             </div>
           </Column>
-          <Flex fillWidth horizontal="center" marginBottom="l">
+          <Flex fillWidth horizontal="center" marginBottom="xl">
             <WorkHistory/>
           </Flex>
           
