@@ -29,7 +29,7 @@ export default function BlogClient({ allPosts }: { allPosts: any[] }) {
           { value: "personal", label: "Personal" },
           { value: "career", label: "Career" },
           { value: "startups", label: "Startups" },
-          { value: "AI", label: "AI" },
+          { value: "ai", label: "AI" },
           { value: "innovation", label: "Innovation" },
           { value: "engineering", label: "Engineering" },
           { value: "tech", label: "Tech" },
