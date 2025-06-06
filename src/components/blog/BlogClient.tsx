@@ -11,7 +11,7 @@ const tagMap = {
   startups: "Startups",
   ai: "AI",
   innovation: "Innovation",
-  engineering: "Engineering",
+  programming: "Programming",
   tech: "Tech",
   culture: "Culture",
 };
@@ -31,7 +31,7 @@ export default function BlogClient({ allPosts }: { allPosts: any[] }) {
           { value: "startups", label: "Startups" },
           { value: "ai", label: "AI" },
           { value: "innovation", label: "Innovation" },
-          { value: "engineering", label: "Engineering" },
+          { value: "programming", label: "Programming" },
           { value: "tech", label: "Tech" },
           { value: "culture", label: "Culture" }
         ]}        
