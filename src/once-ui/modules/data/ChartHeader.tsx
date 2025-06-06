@@ -177,7 +177,6 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
           <DropdownWrapper
             isOpen={dateRangeOpen}
             onOpenChange={(isOpen) => setDateRangeOpen(isOpen)}
-            placement="bottom-end"
             trigger={
               <IconButton
                 icon="calendar"
@@ -213,7 +212,6 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
                           key={presetName}
                           style={{ paddingLeft: "0.25rem" }}
                           fillWidth
-                          horizontal="start"
                           selected={selectedPreset === presetName}
                           onClick={() => handlePresetClick(presetName)}
                         >
@@ -229,7 +227,6 @@ export const ChartHeader: React.FC<ChartHeaderProps> = ({
                   id="chart-date-range"
                   maxDate={date?.max}
                   minDate={date?.min}
-                  dual={date?.dual}
                   value={dateRange}
                   onChange={handleDateRangeChange}
                 />
