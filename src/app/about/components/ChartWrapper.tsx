@@ -65,11 +65,11 @@ const ChartWrapper = () => {
             />
 
             <BarChart
-              title="Technical Experience (Years)"
+              title="Technical Experience (9+ Years)"
               axis="x"
               barWidth="xl"
               legend={{ position: "bottom-center" }}
-              series={[{ key: "Years", color: "cyan" }]}
+              series={[{ key: "Years", color: "violet" }]}
               data={[
                 { label: "TypeScript", Years: 7 },
                 { label: "React", Years: 7 },
@@ -77,9 +77,9 @@ const ChartWrapper = () => {
                 { label: "Python", Years: 6 },
                 { label: "Go", Years: 4 },
                 { label: "GraphQL", Years: 6 },
-                { label: "AWS", Years: 8 },
+                { label: "AWS", Years: 6 },
                 { label: "PostgreSQL", Years: 7 },
-                { label: "MySQL", Years: 8 },
+                { label: "MySQL", Years: 6 },
               ]}
             />
           </Row>

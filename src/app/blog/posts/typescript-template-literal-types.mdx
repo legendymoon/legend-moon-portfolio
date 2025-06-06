@@ -1,0 +1,104 @@
+---
+title: "Managing Complex State in TypeScript with New Template Literal Types"
+summary: "Learn how TypeScript's enhanced template literal types simplify managing complex state structures in your applications."
+publishedAt: "2025-02-10"
+tag: "Programming"
+image: "/images/blog/programming-typescript-template-literal-types/cover.jpg"
+---
+
+## Introduction
+
+Managing complex states in large applications can quickly become challenging. TypeScript’s introduction of enhanced template literal types provides a powerful tool to manage such scenarios clearly and effectively.
+
+In this blog, we'll explore how these improved template literal types simplify and structure state management.
+
+## Understanding Enhanced Template Literal Types
+
+Template literal types allow dynamically generated types, improving type safety and reducing repetitive code. Enhanced versions further enable intricate and structured type creation.
+
+Here's a simple example:
+
+<CodeBlock
+    marginBottom="16"
+    codeInstances={[
+      {
+        code:
+`type ActionName<T extends string> = \`set\${Capitalize<T>}State\`;
+
+type UserActions = ActionName<'user'>;  // 'setUserState'
+type CartActions = ActionName<'cart'>;  // 'setCartState'`,
+        language: "typescript",
+        label: "src/types/actions.ts"
+      }
+    ]}
+/>
+
+## Practical Example: Complex State Management
+
+Consider managing different states within a React application, such as authentication, theme, and user settings. Template literals elegantly generate precise action and state types dynamically.
+
+Here's how you can achieve that:
+
+<CodeBlock
+    marginBottom="16"
+    codeInstances={[
+      {
+        code:
+`type StateKey = 'auth' | 'theme' | 'settings';
+
+type StateAction<T extends StateKey> = 
+  | { type: \`update\${Capitalize<T>}\`; payload: any }
+  | { type: \`reset\${Capitalize<T>}\` };
+
+type AuthActions = StateAction<'auth'>;
+// { type: "updateAuth"; payload: any } | { type: "resetAuth" }`,
+        language: "typescript",
+        label: "src/types/stateActions.ts"
+      }
+    ]}
+/>
+
+## Using with Reducers in React
+
+This structured approach significantly simplifies reducer logic, making it concise and readable. Here's a reducer implementation example using the dynamically generated action types:
+
+<CodeBlock
+    marginBottom="16"
+    codeInstances={[
+      {
+        code:
+`interface AuthState {
+  isAuthenticated: boolean;
+  user: null | { id: string; name: string };
+}
+
+function authReducer(
+  state: AuthState, 
+  action: StateAction<'auth'>
+): AuthState {
+  switch(action.type) {
+    case 'updateAuth':
+      return { ...state, ...action.payload };
+    case 'resetAuth':
+      return { isAuthenticated: false, user: null };
+    default:
+      return state;
+  }
+}`,
+        language: "typescript",
+        label: "src/reducers/authReducer.ts"
+      }
+    ]}
+/>
+
+## Benefits of Using Template Literal Types
+
+### 1. Enhanced Type Safety
+Template literal types significantly reduce manual error-prone declarations.
+
+### 2. Cleaner and Maintainable Code
+Automatic type creation keeps code concise, readable, and maintainable.
+
+## Conclusion
+
+Enhanced template literal types are a powerful feature of modern TypeScript, enabling developers to manage complex state scenarios elegantly. Leveraging this feature will streamline your application's scalability and maintainability.
