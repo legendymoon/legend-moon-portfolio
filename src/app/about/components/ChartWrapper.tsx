@@ -15,12 +15,12 @@ const ChartWrapper = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setVisible(true);
-          observer.disconnect(); // trigger once
+          observer.disconnect(); // Trigger once
         }
       },
       {
         root: null,
-        rootMargin: "0px", // delay trigger
+        rootMargin: "0px 0px 20px 0px",
         threshold: 0.4,
       }
     );
@@ -30,54 +30,50 @@ const ChartWrapper = () => {
   }, []);
 
   return (
-    <div ref={chartRef}>
-      {visible && (
-        <>
-         <Row
-            fillWidth
-            gap="m"
-            marginBottom="xl"
-            className="space-y-4"
-            align="center"
-          >
-            <PieChart
-              title="Tech Impact Focus"
-              legend={{
-                display: true,
-                position: "bottom-center",
-              }}
-              ring={{ inner: 40, outer: 70 }}
-              series={{
-                key: "value",
-              }}
-              origo={{ x: 50, y: 40 }}
-              data={[
-                { name: "Mentorship & Collaboration", value: 20 },
-                { name: "Start-up Agility & Growth", value: 25 },
-                { name: "Security & Compliance Automation", value: 15 },
-                { name: "AI/LLM Innovation", value: 20 },
-                { name: "System Architecture", value: 20 },
-              ]}
-            />
+    <div ref={chartRef} style={{ minHeight: visible ? "auto" : "700px" }}>
+      {visible ? (
+        <Row
+          fillWidth
+          gap="m"
+          marginBottom="xl"
+          className="space-y-4"
+          align="center"
+        >
+          <PieChart
+            title="Tech Impact Focus"
+            legend={{ display: true, position: "bottom-center" }}
+            ring={{ inner: 40, outer: 70 }}
+            series={{ key: "value" }}
+            origo={{ x: 50, y: 40 }}
+            data={[
+              { name: "Mentorship & Collaboration", value: 20 },
+              { name: "Start-up Agility & Growth", value: 25 },
+              { name: "Security & Compliance Automation", value: 15 },
+              { name: "AI/LLM Innovation", value: 20 },
+              { name: "System Architecture", value: 20 },
+            ]}
+          />
 
-            <BarChart
-              title="Technical Experience (Years)"
-              axis="x"
-              barWidth="xl"
-              legend={{ position: "bottom-center" }}
-              series={[{ key: "Years", color: "cyan" }]}
-              data={[
-                { label: "TypeScript", Years: 7 },
-                { label: "React", Years: 7 },
-                { label: "Node.js", Years: 7 },
-                { label: "Python", Years: 6 },
-                { label: "Go", Years: 4 },
-                { label: "GraphQL", Years: 5 },
-                { label: "GCP/AWS", Years: 6 },
-              ]}
-            />
-          </Row>
-        </>
+          <BarChart
+            title="Technical Experience (Years)"
+            axis="x"
+            barWidth="xl"
+            legend={{ position: "bottom-center" }}
+            series={[{ key: "Years", color: "cyan" }]}
+            data={[
+              { label: "TypeScript", Years: 7 },
+              { label: "React", Years: 7 },
+              { label: "Node.js", Years: 7 },
+              { label: "Python", Years: 6 },
+              { label: "Go", Years: 4 },
+              { label: "GraphQL", Years: 5 },
+              { label: "GCP/AWS", Years: 6 },
+            ]}
+          />
+        </Row>
+      ) : (
+        // Dummy placeholder to preserve layout height
+        <div style={{ height: "700px" }} />
       )}
     </div>
   );
