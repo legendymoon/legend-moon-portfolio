@@ -23,8 +23,9 @@ export function Posts({
   );
 
   const filteredBlogs = tag
-    ? sortedBlogs.filter((post) => post.metadata.tag === tag)
-    : sortedBlogs;
+  ? sortedBlogs.filter((post) => post.metadata.tags.includes(tag))
+  : sortedBlogs;
+
 
   const displayedBlogs = range
     ? filteredBlogs.slice(

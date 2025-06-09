@@ -1,0 +1,133 @@
+---
+title: "The Hidden Culture Layer of Every Code Review"
+summary: "Code reviews aren't just technical—they're deeply cultural. This is a look at the unspoken norms, expectations, and emotional dynamics that shape how we collaborate through code."
+publishedAt: "2024-06-08"
+tags: [ "Career", "Programming", "Culture" ]
+image: "/images/blog/culture-code-review-culture/cover.jpg"
+---
+
+![Two developers at whiteboard with review comments overlay](/images/blog/culture-code-review-culture/1.jpeg)
+
+## More Than Just Syntax
+
+On the surface, code reviews are about correctness:
+
+- Does it work?
+- Is it efficient?
+- Are the tests passing?
+
+But underneath that logic lies something more human—and harder to measure:
+
+- What tone is this comment in?
+- Is this nitpicking or mentoring?
+- Why does this feel personal?
+
+Every code review is also a window into your team’s **cultural DNA**.
+
+---
+
+## What Gets Said—and What Gets Felt
+
+Consider two comments on the same line:
+
+- `Can we rename this for clarity?`
+- `This name sucks.`
+
+Both address the same issue.  
+But one builds trust. The other chips away at it.
+
+> The difference isn’t technical. It’s cultural.
+
+How we review code reflects **what we value**, **how we relate**, and **how safe people feel** when shipping work.
+
+---
+
+![Sticky note with “LGTM” and a squiggly face](/images/blog/culture-code-review-culture/2.avif)
+
+---
+
+## Norms That Aren’t in the Handbook
+
+Every team has its own *invisible rules*:
+
+- How quickly are reviews expected to land?
+- Are senior engineers expected to push back more—or less?
+- Is it okay to merge with minor comments unresolved?
+- How do you handle disagreement—inline or async?
+
+If new engineers have to “figure it out as they go,”  
+that’s not flexibility—it’s **hidden friction**.
+
+---
+
+## The Emotional Economy of Code Reviews
+
+No one says this out loud, but we all know it:
+
+- A fast LGTM feels like trust.  
+- A wall of red comments feels like judgment.  
+- Silence can feel worse than rejection.
+
+Reviews aren’t neutral. They carry **emotional weight**.  
+Especially for junior engineers or those from underrepresented backgrounds.
+
+The smallest phrase—“why did you do this?”—can feel like curiosity or condescension, depending on tone and context.
+
+---
+
+![Inline comments with emoji tone cues](/images/blog/culture-code-review-culture/3.png)
+
+---
+
+## Better Culture, Better Reviews
+
+A few cultural nudges can radically improve the experience:
+
+### ✅ Normalize Context First
+
+Start with intention, not critique.
+
+<CodeBlock
+  marginBottom="16"
+  codeInstances={[
+    {
+      code:
+`// Instead of:
+Why did you rename this?
+
+// Try:
+Just checking—was the rename to improve alignment with the new schema?`,
+      language: "ts",
+      label: "review-examples.ts"
+    }
+  ]}
+/>
+
+### ✅ Review the Approach, Not the Person
+
+Focus on decision-making, not personal style.
+
+### ✅ Make Praise as Specific as Critique
+
+Don’t just flag what’s broken. Call out what’s elegant, efficient, or thoughtful.
+
+### ✅ Clarify Expectations
+
+Define what’s *blocking* vs what’s *suggestion*.  
+Avoid the passive-aggressive “nit (non-blocking)” unless it’s truly non-blocking.
+
+---
+
+![Culture iceberg diagram with 'code review' above water](/images/blog/culture-code-review-culture/4.webp)
+
+---
+
+## Final Thoughts
+
+Your codebase has a style guide.  
+Your code reviews have a culture—even if no one’s written it down.
+
+The best teams know this, talk about it, and tune it over time.
+
+Because behind every pull request is a person.  
+And what they remember isn’t always what you wrote—it’s how you made them feel.

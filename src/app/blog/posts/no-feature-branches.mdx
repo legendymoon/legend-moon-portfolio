@@ -1,0 +1,84 @@
+---
+title: "Why Our Team Stopped Using Feature Branches"
+summary: "Explore how moving away from feature branches improved our development speed, reduced merge conflicts, and enhanced team collaboration."
+publishedAt: "2024-10-03"
+tags: [ "Careers", "Tech" ]
+image: "/images/blog/tech-no-feature-branches/cover.webp"
+---
+
+## Introduction
+
+For years, feature branches were a default part of our Git workflow. Each new feature or bug fix lived in its own isolated branch, waiting to be reviewed and merged. But over time, we started to notice some serious issues: long-lived branches, painful merge conflicts, and stale pull requests.
+
+So, we decided to try something different.
+
+## The Problem with Feature Branches
+
+Feature branches sound great in theory—they offer isolation and control. But in practice, they led to a few core problems for us:
+
+- **Merge Conflicts**: The longer a branch lived, the more painful the merge.
+- **Context Switching**: Reviews would come late, and by then, the author had mentally moved on.
+- **Broken Master Avoidance**: Fear of breaking the main branch discouraged frequent merges.
+- **Hidden Work**: Team members couldn’t see progress until a PR was opened.
+
+## What We Switched To: Trunk-Based Development
+
+We adopted a trunk-based approach. That means:
+
+- Developers push directly to `main` (or a short-lived integration branch).
+- Every commit is small, tested, and reviewed quickly.
+- Features are behind flags or incomplete behind guards.
+
+<CodeBlock
+  marginBottom="16"
+  codeInstances={[
+    {
+      code:
+        `if (isFeatureEnabled("newDashboard")) {
+          render(<NewDashboard />);
+        } else {
+          render(<OldDashboard />);
+        }`,
+      language: "tsx",
+      label: "src/features/dashboard.tsx"
+    }
+  ]}
+/>
+
+## How We Made It Work
+
+### ✅ 1. Feature Flags
+
+We used a simple internal toggle system based on environments or user IDs. Tools like LaunchDarkly or Unleash can offer production-ready flag management.
+
+### ✅ 2. CI/CD Enforcement
+
+We ensured all commits to `main` went through a pipeline with:
+
+- Linting
+- Type checking
+- Unit tests
+- Integration smoke checks
+
+### ✅ 3. Review on Commit, Not on Pull Request
+
+We shifted to lightweight code reviews on small, incremental commits instead of big-bang PRs.
+
+## The Payoff
+
+Since switching, we’ve noticed:
+
+- **Faster Releases**: We deploy smaller changes more frequently.
+- **Fewer Merge Conflicts**: Less divergence = less pain.
+- **Better Collaboration**: Everyone sees what’s changing in near real-time.
+- **More Confidence**: Failing early in CI beats failing late in merge.
+
+<Carousel
+  images={[{ src: "/images/blog/tech-no-feature-branches/ci-flow.jpg", alt: "CI flow with trunk-based development" }]}
+/>
+
+## Final Thoughts
+
+Trunk-based development isn’t a silver bullet, and it requires discipline, tooling, and team buy-in. But for us, moving away from feature branches has been a game-changer. It’s helped us build faster, review better, and work closer as a team.
+
+Give it a try. You might never look back.

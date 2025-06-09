@@ -1,0 +1,131 @@
+---
+title: "Monitoring Go Services with OpenTelemetry and Grafana"
+summary: "Learn how to integrate OpenTelemetry into Go services and visualize metrics, traces, and logs in Grafana for real-time observability."
+publishedAt: "2024-07-22"
+tags: [ "Programming", "Tech" ]
+image: "/images/blog/tech-monitoring-go-opentelemetry-grafana/cover.jpg"
+---
+
+## Introduction
+
+Monitoring is no longer a luxury—it's a necessity. Whether you're scaling microservices or debugging production outages, observability provides the visibility you need to keep systems healthy.
+
+In this post, we’ll walk through how to monitor Go services using **OpenTelemetry** for instrumentation and **Grafana** for visualization.
+
+## Why OpenTelemetry?
+
+[OpenTelemetry](https://opentelemetry.io) (OTel) is an open-source observability framework that provides standardized APIs and SDKs for **traces**, **metrics**, and **logs**. It helps you avoid vendor lock-in and offers deep integration with popular backends.
+
+## Step 1: Install OpenTelemetry Packages
+
+In your Go project, install the required packages:
+
+<CodeBlock
+  marginBottom="16"
+  codeInstances={[
+    {
+      code:
+        `go get go.opentelemetry.io/otel
+         go get go.opentelemetry.io/otel/sdk/trace
+         go get go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp`,
+      language: "bash",
+      label: "Terminal"
+    }
+  ]}
+/>
+
+## Step 2: Configure the Tracer
+
+Set up a tracer that exports spans via OTLP (OpenTelemetry Protocol) to Grafana Agent or another collector:
+
+<CodeBlock
+  marginBottom="16"
+  codeInstances={[
+    {
+      code:
+      `package main
+
+      import (
+        "context"
+        "log"
+        "go.opentelemetry.io/otel"
+        "go.opentelemetry.io/otel/sdk/trace"
+        "go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracehttp"
+      )
+
+      func initTracer(ctx context.Context) func() {
+        exporter, err := otlptracehttp.New(ctx)
+        if err != nil {
+          log.Fatal(err)
+        }
+
+        tp := trace.NewTracerProvider(trace.WithBatcher(exporter))
+        otel.SetTracerProvider(tp)
+
+        return func() {
+          _ = tp.Shutdown(ctx)
+        }
+      }`,
+      language: "go",
+      label: "main.go"
+    }
+  ]}
+/>
+
+## Step 3: Instrument Your Code
+
+Use the tracer to start spans for key operations:
+
+<CodeBlock
+  marginBottom="16"
+  codeInstances={[
+    {
+      code:
+      `func HandleRequest(ctx context.Context) {
+        tracer := otel.Tracer("my-service")
+        ctx, span := tracer.Start(ctx, "HandleRequest")
+        defer span.End()
+
+        // Your business logic here
+      }`,
+      language: "go",
+      label: "handlers/request.go"
+    }
+  ]}
+/>
+
+## Step 4: Set Up Grafana
+
+You can send traces to:
+
+- **Grafana Cloud**
+- **Grafana Agent** (on-prem)
+- **Tempo** (distributed tracing backend)
+
+Once connected, Grafana's Explore tab will show spans like this:
+
+<Carousel
+  images={[{ src: "/images/blog/tech-monitoring-go-opentelemetry-grafana/span-tree.png", alt: "Trace view in Grafana Tempo" }]}
+/>
+
+To view metrics and logs, you can also configure:
+
+- **Prometheus** for metrics
+- **Loki** for logs
+
+## Benefits of This Setup
+
+✅ **Unified Observability**  
+Traces, metrics, and logs all tied together for complete context.
+
+✅ **Vendor-Neutral**  
+Switch backends anytime—Prometheus, Tempo, Jaeger, etc.
+
+✅ **Lightweight Instrumentation**  
+OTel has minimal overhead and great community support.
+
+## Conclusion
+
+By integrating OpenTelemetry with Go and visualizing it through Grafana, you unlock powerful insights into your services. Whether it's performance bottlenecks, error tracing, or latency spikes, you'll be ready with real-time visibility.
+
+Start simple, and layer in complexity as your system grows. Your future self will thank you.

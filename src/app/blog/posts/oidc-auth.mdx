@@ -1,0 +1,123 @@
+---
+title: "Why We Switched to OIDC for Service-to-Service Auth"
+summary: "Static tokens got the job done—until they didn't. Here's how OIDC helped us fix brittle auth flows, simplify secret management, and scale internal service communication securely."
+publishedAt: "2024-06-08"
+tags: [ "Tech" ]
+image: "/images/blog/tech-oidc-auth/cover.png"
+---
+
+![OIDC trust handshake visual](/images/blog/tech-oidc-auth/1.png)
+
+## The Breaking Point
+
+It started with a Slack alert about a failed internal API call. At first, we thought it was just a bad deploy. Then it happened again. And again.
+
+The culprit? A **hardcoded bearer token** that had expired but was still in use—across four services.
+
+We realized we were running a system held together by a patchwork of static secrets and hopeful assumptions. It was time for a change.
+
+---
+
+## Auth Had Become a Liability
+
+Let’s break down what we were dealing with:
+
+- 🔒 Secrets scattered in config files and CI pipelines.
+- 🤝 No handshake—just "here’s a token, trust me."
+- 🔁 Manual token rotation during late-night hotfixes.
+- 📉 No visibility into who was calling what and why.
+
+Every new microservice added more complexity. And more risk.
+
+---
+
+## Enter OIDC
+
+We didn’t want to reinvent the wheel. We wanted something battle-tested, standards-based, and flexible.  
+OpenID Connect (OIDC) gave us:
+
+- Short-lived **JWTs** with verifiable claims
+- **Centralized issuance** and automatic expiry
+- Support for the **Client Credentials Flow** (ideal for service-to-service)
+- **JWKS** endpoints for public-key-based validation
+
+Most importantly, it let us enforce *identity, access, and trust* — not just possession of a shared secret.
+
+---
+
+## What Changed Under the Hood
+
+We defined every service as a client with a unique ID and secret in our IdP (Auth0). When `Service A` needed to talk to `Service B`, it would:
+
+1. Exchange its credentials for a token scoped to `Service B`.
+2. Send the token with its requests.
+3. `Service B` would validate it using the IdP’s public JWKS URL.
+
+<CodeBlock
+  codeInstances={[
+    {
+      code:
+        `POST /oauth/token
+
+{
+  "grant_type": "client_credentials",
+  "client_id": "svc-a",
+  "client_secret": "...",
+  "audience": "svc-b"
+}`,
+      language: "http",
+      label: "Token request"
+    }
+  ]}
+/>
+
+No shared secrets. No manual rotation. No guesswork.
+
+---
+
+## Surprises Along the Way
+
+This shift wasn’t pain-free. Some lessons hit us early:
+
+- 🔄 **Token expiration hurts** if your service doesn’t retry properly.
+- 🔐 **Caching JWKS** is mandatory—fetching it on every request is a footgun.
+- ⚠️ **Browser-incompatible flows** meant we kept REST tokens for frontend APIs.
+- 🧩 **Scope naming is architecture**. A good naming scheme for scopes avoids spaghetti permissions later.
+
+Still, it was a massive upgrade.
+
+---
+
+![JWT lifecycle and trust chain](/images/blog/tech-oidc-auth/2.jpg)
+
+---
+
+## The Real Payoff
+
+Today, our service-to-service auth:
+
+- 🎯 Is **zero-trust** by design—every call is validated
+- 🔍 Is **auditable**—we know who called what, and when
+- 🔄 Is **rotated** every hour, automatically
+- 🔧 Is **enforced** with a shared middleware across Node, Go, and Python services
+
+We sleep better now.
+
+---
+
+## Not Just Secure—Clean
+
+One of the biggest wins wasn’t even security. It was **clean architecture**.
+
+By tying identity to services instead of secrets, we made ownership, responsibility, and access explicit. It became obvious which services needed which privileges—and which didn’t.
+
+If you're still passing around long-lived tokens like backstage passes, you might want to ask: _what happens if one of them leaks?_
+
+---
+
+## TL;DR
+
+- Static tokens were fine… until we scaled.
+- OIDC gave us rotating, verifiable, scoped tokens.
+- We now trust identity, not possession.
+- It’s been the single best infrastructure upgrade we’ve made in the past year.

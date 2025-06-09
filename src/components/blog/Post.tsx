@@ -5,11 +5,17 @@ import styles from './Posts.module.scss';
 import { formatDate } from '@/app/utils/formatDate';
 
 interface PostProps {
-    post: any;
+    post: {
+      metadata: {
+        tags?: string[];
+        [key: string]: any;
+      };
+      [key: string]: any;
+    };
     thumbnail: boolean;
     direction?: "row" | "column";
 }
-
+  
 export default function Post({ post, thumbnail, direction }: PostProps) {
     return (
         <SmartLink
@@ -55,12 +61,12 @@ export default function Post({ post, thumbnail, direction }: PostProps) {
                         onBackground="neutral-weak">
                         {formatDate(post.metadata.publishedAt, false)}
                     </Text>
-                    { post.metadata.tag &&
-                        <Tag
-                            className="mt-12"
-                            label={post.metadata.tag}
-                            variant="neutral" />
-                    }
+                    <Flex fillWidth gap="4">
+                    {Array.isArray(post.metadata.tags) &&
+                    post.metadata.tags.map((tag: string) => (
+                        <Tag key={tag} className="mt-12" label={tag} variant="neutral" />
+                    ))}
+                    </Flex>
                 </Column>
             </Flex>
         </SmartLink>

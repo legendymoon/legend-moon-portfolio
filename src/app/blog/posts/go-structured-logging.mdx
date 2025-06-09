@@ -1,0 +1,128 @@
+---
+title: "Implementing Structured Logging with Go’s Built-in Slog Package"
+summary: "Discover how Go's new built-in structured logging package 'slog' enhances clarity, readability, and maintainability of application logs."
+publishedAt: "2025-01-15"
+tags: [ "Programming" ]
+image: "/images/blog/programming-go-structured-logging/cover.webp"
+---
+
+## Introduction
+
+Logging is critical for understanding application behavior, debugging issues, and monitoring performance. With Go 1.21, structured logging became even more straightforward and powerful through the built-in `slog` package.
+
+Let's explore how you can implement structured logging effectively in your Go applications.
+
+## Getting Started with slog
+
+Go’s `slog` offers built-in support for structured logs, providing readable and easily parsable log outputs. Here’s how you start with basic structured logging:
+
+<CodeBlock
+    marginBottom="16"
+    codeInstances={[
+      {
+        code:
+`package main
+
+import (
+    "log/slog"
+    "os"
+)
+
+func main() {
+    logger := slog.New(slog.NewJSONHandler(os.Stdout, nil))
+    logger.Info("Application started", "version", "1.0.0")
+}`,
+        language: "go",
+        label: "cmd/main.go"
+      }
+    ]}
+/>
+
+## Logging Structured Data
+
+With structured logging, contextual data becomes clear and organized. Here’s how you can log structured events effectively:
+
+<CodeBlock
+    marginBottom="16"
+    codeInstances={[
+      {
+        code:
+`func processOrder(orderID string, amount float64) {
+    slog.Info("Processing order",
+        "orderID", orderID,
+        "amount", amount,
+        "status", "initiated",
+    )
+}`,
+        language: "go",
+        label: "internal/orders/process.go"
+      }
+    ]}
+/>
+
+## Advantages of Using Go's slog
+
+### 1. Enhanced Readability and Parsing
+Logs are structured, making it easy to search, filter, and analyze in monitoring systems like Elasticsearch or Loki.
+
+### 2. Simplified Debugging
+Structured logs provide precise context, significantly easing debugging and issue resolution.
+
+## Customizing Log Levels and Formatting
+
+Customize log levels and formatting to suit your application needs. Here's an example:
+
+<CodeBlock
+    marginBottom="16"
+    codeInstances={[
+      {
+        code:
+`package main
+
+import (
+    "log/slog"
+    "os"
+)
+
+func main() {
+    handler := slog.NewTextHandler(os.Stdout, &slog.HandlerOptions{
+        Level: slog.LevelDebug,
+    })
+    logger := slog.New(handler)
+
+    logger.Debug("Debugging application start", "env", "development")
+}`,
+        language: "go",
+        label: "cmd/custom_log_levels.go"
+      }
+    ]}
+/>
+
+## Practical Example: Middleware Logging in Web Applications
+
+Here's how structured logging can enhance clarity when used as middleware in web frameworks:
+
+<CodeBlock
+    marginBottom="16"
+    codeInstances={[
+      {
+        code:
+`func LoggingMiddleware(next http.Handler) http.Handler {
+    return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+        slog.Info("Incoming request",
+            "method", r.Method,
+            "path", r.URL.Path,
+            "remote_addr", r.RemoteAddr,
+        )
+        next.ServeHTTP(w, r)
+    })
+}`,
+        language: "go",
+        label: "internal/middleware/logging.go"
+      }
+    ]}
+/>
+
+## Conclusion
+
+Go's built-in `slog` package simplifies structured logging significantly, enhancing your application's logs clarity and maintainability. Integrate structured logging with `slog` into your Go projects to streamline debugging and monitoring effectively.

@@ -1,0 +1,102 @@
+---
+title: "Migrating from REST to gRPC: A Retrospective"
+summary: "A deep dive into our transition from REST APIs to gRPC: the motivations, the technical shifts, what we gained, and the tradeoffs we didn't see coming."
+publishedAt: "2025-02-04"
+tags: [ "Programming", "Tech" ]
+image: "/images/blog/tech-grpc-retrospective/cover.png"
+---
+
+![gRPC Evolution Diagram](/images/blog/tech-grpc-retrospective/1.png)
+
+## Why We Considered Leaving REST
+
+Our backend stack was largely RESTful—standard JSON APIs over HTTP, documented with OpenAPI, and easy to consume. But as our architecture grew—more services, tighter SLAs, and increased internal communication—REST started to show cracks:
+
+- **Payload Overhead**: JSON is verbose and costly at scale.
+- **Inconsistent Contracts**: Schemas drifted over time without enforcement.
+- **Latency Issues**: Multiple hops between services added delay.
+- **Code Duplication**: Every service had boilerplate: routing, validation, serialization.
+
+gRPC looked like a promising answer—binary, strongly typed, with first-class support for streaming and efficient inter-service communication.
+
+## The Migration Process
+
+We didn’t go all-in overnight. We started with internal services where we could control both the client and server, then gradually expanded.
+
+### 🔁 Step 1: Define Protos and Set Up Tooling
+
+We created `.proto` definitions for existing APIs. This became our new source of truth.
+
+<CodeBlock
+  codeInstances={[
+    {
+      code:
+        `service UserService {
+          rpc GetUser (GetUserRequest) returns (GetUserResponse);
+        }
+
+        message GetUserRequest {
+          string user_id = 1;
+        }
+
+        message GetUserResponse {
+          string name = 1;
+          string email = 2;
+        }`,
+      language: "proto",
+      label: "user_service.proto"
+    }
+  ]}
+/>
+
+Generated client and server stubs across Go, Python, and Node using [`buf`](https://buf.build/) to maintain consistency and simplify updates.
+
+### 🔁 Step 2: Parallel Support (REST + gRPC)
+
+For critical services, we supported both REST and gRPC during the migration phase. REST acted as a fallback for clients that hadn’t switched yet.
+
+This parallel period also gave us confidence in performance gains. We saw **~40% reduction in response time** for gRPC endpoints compared to their REST counterparts.
+
+### 🔁 Step 3: Observability, CI & Rollout
+
+To match REST-level observability, we:
+
+- Integrated **OpenTelemetry** tracing into gRPC services.
+- Added gRPC-specific health checks and retries.
+- Built dashboards in **Grafana** comparing REST vs gRPC traffic and errors.
+
+![gRPC vs REST Latency in Grafana](/images/blog/tech-grpc-retrospective/2.png)
+
+We enforced linting and breaking-change checks in CI to keep `.proto` definitions stable and backward compatible.
+
+---
+
+## What We Gained
+
+- 🚀 **Performance**: Faster, smaller payloads via Protobuf over HTTP/2.
+- 🧱 **Contract-First Development**: Schemas as source-of-truth made teams more aligned.
+- 🔌 **Cross-Language Support**: Clients in Python, Go, and Node with zero manual code.
+- 🔁 **Built-in Streaming**: Real-time use cases became much simpler with `server-streaming`.
+
+---
+
+## The Tradeoffs We Didn't Expect
+
+While the move was mostly positive, a few pain points emerged:
+
+- ❗ **gRPC and Browsers**: Native browser support is still weak, requiring a REST proxy for public APIs.
+- 🔍 **Debugging Is Harder**: Binary Protobuf isn’t human-readable. We had to build internal tooling to inspect payloads.
+- 🛠 **Learning Curve**: Teams needed ramp-up time to understand `.proto` files, service definitions, and streaming semantics.
+- 🧪 **Testing Complexity**: Mocks and test doubles for gRPC clients required more boilerplate and infra.
+
+---
+
+## Final Thoughts
+
+The migration from REST to gRPC wasn’t just about speed—it was about **clarity, consistency, and scale**. It required new tools, new workflows, and buy-in from multiple teams.
+
+Today, most of our service-to-service communication runs on gRPC. REST still powers external APIs where browser compatibility matters—but internally, gRPC has become our default.
+
+If you're dealing with growing service sprawl, unclear API contracts, or latency bottlenecks, consider trying gRPC. Just make sure you’re prepared for both the **performance rewards** and the **operational hurdles**.
+
+---
