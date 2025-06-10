@@ -8,7 +8,7 @@ const person = {
   },
   role: "Senior Software Engineer",
   avatar: "/images/avatar.jpg",
-  email: "ryanquinn808@gmail.com",
+  email: "ryanquinn.us@gmail.com",
   location: "Raleigh, NC", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
   languages: ["English"], // optional: Leave the array empty if you don't want to display languages
 };
