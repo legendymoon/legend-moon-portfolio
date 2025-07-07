@@ -1,15 +1,15 @@
 import { Logo } from "@/once-ui/components";
 
 const person = {
-  firstName: "Ryan",
-  lastName: "Quinn",
+  firstName: "Anthony",
+  lastName: "Huang",
   get name() {
     return `${this.firstName} ${this.lastName}`;
   },
   role: "Senior Software Engineer",
   avatar: "/images/avatar.jpg",
-  email: "ryanquinn.us@gmail.com",
-  location: "Raleigh, NC", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
+  email: "a.huang97808@gmail.com",
+  location: "New York, NY", // Expecting the IANA time zone identifier, e.g., 'Europe/Vienna'
   languages: ["English"], // optional: Leave the array empty if you don't want to display languages
 };
 
@@ -30,12 +30,12 @@ const social = [
   {
     name: "GitHub",
     icon: "github",
-    link: "https://github.com/legendy4141",
+    link: "https://github.com/legendymoon",
   },
   {
     name: "LinkedIn",
     icon: "linkedin",
-    link: "https://linkedin.com/in/ryanquinn3",
+    link: "https://www.linkedin.com/in/anthuang",
   },
   {
     name: "Email",
@@ -50,7 +50,7 @@ const home = {
   label: "Home",
   title: `${person.firstName}'s Portfolio`,
   description: `Portfolio website showcasing my work as a ${person.role}`,
-  headline: <>Hey, I'm {person.firstName}! Welcome to my corner of the Internet!</>,
+  headline: <>Hey, I'm {person.firstName}! <br/> Welcome to my corner of the Internet!</>,
   // featured: {
   //   display: false,
   //   title: <>Recent project: <strong className="ml-4">Once UI</strong></>,
@@ -77,10 +77,10 @@ const about = {
   },
   calendar: {
     display: true,
-    link: "https://cal.com/ryanquinn808",
+    link: "https://calendly.com/anthuang/30min",
   },
   intro: {
-    display: true,
+    display: false,
     title: "Introduction",
     description: (
       <>

@@ -56,30 +56,30 @@ const ChartWrapper = () => {
               series={{ key: "value" }}
               origo={{ x: 50, y: 40 }}
               data={[
-                { name: "Mentorship & Collaboration", value: 20 },
-                { name: "Start-up Agility & Growth", value: 25 },
-                { name: "Security & Compliance Automation", value: 15 },
-                { name: "AI/LLM Innovation", value: 20 },
-                { name: "System Architecture", value: 20 },
+                { name: "AI/LLM Innovation", value: 30 },
+                { name: "Product Development", value: 20 },
+                { name: "System Design & Architecture", value: 20 },
+                { name: "Security & Compliance", value: 15 },
+                { name: "Technical Leadership", value: 15 },               
               ]}
             />
 
             <BarChart
-              title="Technical Experience (9+ Years)"
+              title="Technical Experience (6+ Years)"
               axis="x"
               barWidth="xl"
               legend={{ position: "bottom-center" }}
               series={[{ key: "Years", color: "violet" }]}
               data={[
-                { label: "TypeScript", Years: 7 },
-                { label: "React", Years: 7 },
-                { label: "Node.js", Years: 7 },
+                { label: "TypeScript", Years: 6 },
+                { label: "React", Years: 6 },
+                { label: "Node.js", Years: 5 },
                 { label: "Python", Years: 6 },
-                { label: "Go", Years: 4 },
-                { label: "GraphQL", Years: 6 },
-                { label: "AWS", Years: 6 },
-                { label: "PostgreSQL", Years: 7 },
-                { label: "MySQL", Years: 6 },
+                { label: "Java", Years: 5 },
+                { label: "GraphQL", Years: 4 },
+                { label: "AWS", Years: 5 },
+                { label: "PostgreSQL", Years: 5 },
+                { label: "MySQL", Years: 4 },
               ]}
             />
           </Row>

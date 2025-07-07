@@ -35,7 +35,7 @@ export default function Home() {
         }}
       />
       <Column fillWidth paddingY="24" gap="m">
-        <Column maxWidth="s">
+        <Column maxWidth="m">
           {/* {home.featured && (
           <RevealFx fillWidth horizontal="start" paddingTop="16" paddingBottom="32" paddingLeft="12">
             <Badge background="brand-alpha-weak" paddingX="12" paddingY="4" onBackground="neutral-strong" textVariant="label-default-s" arrow={false}
@@ -45,7 +45,7 @@ export default function Home() {
           </RevealFx>
           )} */}
           <RevealFx translateY="4" fillWidth horizontal="start" paddingBottom="16">
-            <Heading wrap="balance" variant="display-strong-l">
+            <Heading wrap="balance" variant="display-strong-l" style={{ fontSize: "60px" }}>
               {home.headline}
             </Heading>
           </RevealFx>

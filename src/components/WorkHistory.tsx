@@ -3,42 +3,36 @@ import React, { useEffect, useState } from 'react';
 
 const workHistoryContent = [
   {
-    company: 'Vanta',
-    duration: '2023 – 2025',
+    company: 'Ramp',
+    duration: '2023 – Present',
     role: 'Senior Software Engineer',
-    description: `At Vanta, I contributed to the company's growth beyond $100M ARR and a $2.45B valuation by leading development on key features in Vanta AI and the Trust Center. 
-    I drove full-stack initiatives that enhanced security automation and user experience, embedding LLMs to streamline compliance workflows. 
-    My engineering contributions supported enterprise-scale reliability and helped Vanta earn recognition as Fast Company's #1 Most Innovative Security Company of 2024.`
+    description: `In 2023, I joined Ramp as a Senior Software Engineer and founding member of its AI efforts. 
+    I led the development of GPT-4-powered workflows that automated expense processing and contract analysis, while contributing to launches like Ramp Procurement and Treasury. 
+    During this time, Ramp grew to 40,000 customers and a $16B valuation, reflecting the impact of our work.`,
   },
   {
-    company: 'Labelbox',
-    duration: '2018 – 2023',
-    role: 'Staff Software Engineer / Software Engineering Lead',
-    description: `At Labelbox, I contributed to the company's growth from early-stage startup to a leader in data-centric AI, supporting its rise to a $1B valuation. 
-    I played a key role in platform engineering during major funding rounds totaling $189M and collaborated on initiatives that enabled over 50% YoY revenue growth. 
-    I also helped scale systems adopted by major enterprise and government clients, including the Department of Defense, while contributing to a culture that earned Labelbox a spot on Forbes' "Next Billion-Dollar Startups" list.`
+    company: 'Affirm',
+    duration: '2022 – 2023',
+    role: 'Senior Software Engineer',
+    description: `In 2022, I was promoted to Senior Software Engineer as Affirm crossed $1B in annual revenue and deepened its presence in the fintech landscape. 
+    I focused on making our platforms more resilient, driving backend improvements that supported millions of transactions with high availability. 
+    It was a period of fast-paced scaling and constant learning, where I honed my ability to deliver reliable systems in a high-growth environment.`,
   },
   {
-    company: 'DroneDeploy',
-    duration: '2017 – 2018',
-    role: 'Frontend Engineer',
-    description: `At DroneDeploy, I built real-time geospatial interfaces using React, Redux, and mapping libraries like Mapbox. 
-    I engineered reusable UI components and optimized frontend performance for drone-mapping applications. 
-    My work on frontend build systems using Webpack streamlined deployment and enhanced developer velocity.`,
+    company: 'Affirm',
+    duration: '2020 – 2022',
+    role: 'Software Engineer II',
+    description: `In 2020, I stepped into an advanced role as Software Engineer II as Affirm raised a $500M Series G round and prepared to go public. 
+    I led initiatives to improve system performance and reliability, helping support the company's IPO in January 2021 and its expansion to major retail partnerships. 
+    During this period, Affirm's revenue more than doubled, and I learned how to build infrastructure that could scale with incredible velocity.`,
   },
   {
-    company: 'CircleUp',
-    duration: '2015 – 2017',
+    company: 'Affirm',
+    duration: '2019 – 2020',
     role: 'Software Engineer',
-    description: `At CircleUp, I developed production-level web apps using React and Redux, and implemented server-side rendering with Node.js to improve SEO and load times. 
-    I focused on enhancing user experience across key product areas through modular frontend architectures and real-time interactions.`,
-  },
-  {
-    company: 'Cisco',
-    duration: '2014 - 2015',
-    role: 'Software Engineer',
-    description: `At Cisco, I contributed to network automation and monitoring tools using Java, JavaScript, and Python. 
-    I collaborated on system integration efforts across large-scale networking infrastructure, ensuring secure and reliable communication between services.`,
+    description: `I joined Affirm in 2019 at a pivotal moment as the company was gaining momentum in the Buy Now, Pay Later space. 
+    As part of the payments engineering team, I worked on building secure transaction flows and scaling backend services to handle a surge in demand. 
+    The experience gave me a front-row seat to Affirm's rapid growth and laid the groundwork for my advancement into a more senior role.`,
   },
 ];
 

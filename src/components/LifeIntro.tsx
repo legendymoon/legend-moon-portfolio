@@ -3,33 +3,33 @@ import React, { useEffect, useRef, useState } from 'react';
 
 const timelineBlocks = [
   {
-    title: 'From Singapore to Carnegie Mellon',
-    imageSrc: '/carnegie_graudate.jpeg',
+    title: 'From Shanghai to Michigan',
+    imageSrc: '/images/selfie/michigan_graudate.jpeg',
     reverse: false,
     description: (
       <>
-     I was born in Singapore, always curious about how things worked—taking apart toys, playing with gadgets, and asking “why” more than anyone wanted to hear.
+     I was born in Shanghai, always curious about how things worked—taking apart toys, playing with gadgets, and asking “why” more than anyone wanted to hear.
      In my teens, I stumbled into coding and instantly loved how it let me build things from scratch, just by typing on a screen.
-     That spark took me all the way to Carnegie Mellon in 2010, where I studied Electrical & Computer Engineering and began turning that curiosity into a career.
+     That spark took me all the way to University of Michigan in 2015, where I studied Computer Science and began turning that curiosity into a career.
       </>
     ),
   },  
   {
-    title: 'Finding My Way to Startups',
-    imageSrc: '/startup_building.jpg', // swap in a startup-relevant image
+    title: 'From Enterprise to Innovation',
+    imageSrc: '/images/selfie/enterprise_building.jpg', // swap in an image representing enterprise systems or fintech infrastructure
     reverse: true,
     description: (
       <>
-        I started my journey in enterprise at Cisco, but the pace felt too slow for the kind of builder I wanted to become. 
-        I craved fast-moving teams, scrappy problem-solving, and the thrill of launching real products. 
-        CircleUp was my first step into that world, followed by DroneDeploy and Labelbox—each one pushing me deeper into full-stack systems, infrastructure, and leading high-impact projects. 
-        Once I got a taste of startup life, I never looked back.
+         I started my journey at Affirm, stepping into the world of enterprise systems and high-stakes financial products. 
+          It was where I learned what it meant to build reliable, secure infrastructure that millions of people count on every day. 
+          Designing payment flows and scaling microservices taught me how much craft goes into making something feel seamless. 
+          Over time, I realized I wanted to carry those lessons into faster-moving teams where I could help shape products end to end.
       </>
     ),
   },  
   {
     title: 'Life Beyond the Terminal',
-    imageSrc: '/tracy_and_me.jpg',
+    imageSrc: '/images/selfie/tracy_and_me.jpg',
     reverse: false,
     description: (
       <>
@@ -42,16 +42,16 @@ const timelineBlocks = [
   },  
   {
     title: 'Pushing the Boundaries of AI',
-    imageSrc: '/me_2025.jpeg', // Swap with an image that fits the AI theme if desired
+    imageSrc: '/images/selfie/me_2025.jpeg',
     reverse: true,
     description: (
       <>
-        At Vanta, I've been focused on bringing AI into the heart of security and compliance. 
-        I've led initiatives to integrate large language models into our platform—automating complex reviews, surfacing insights faster, and making it easier for companies to stay secure without slowing down. 
-        It's a space that's traditionally manual and opaque, and I'm excited to be building tools that are making it smarter, clearer, and more adaptive.
+        At Ramp, I’m focused on bringing AI into the core of financial operations. 
+        I’ve led workflows powered by GPT-4 to automate expense processing and contract analysis, helping teams move faster without losing accuracy. 
+        It’s exciting to be building systems that make work smarter and set a new standard for modern finance.
       </>
     ),
-  },  
+  },
 ];
 
 const LifeIntro: React.FC = () => {
@@ -135,7 +135,7 @@ const LifeIntro: React.FC = () => {
         alignItems: 'center',
         justifyContent: 'space-between',
         gap: '2rem',
-        padding: '6rem 0',
+        padding: index === 0 ? '8rem 0' : '5rem 0',
         flexWrap: 'wrap',
       }}
     >
